@@ -1,0 +1,9 @@
+node_modules/
+lib/
+output/
+*.tgz
+*.tsbuildinfo
+data/
+coverage/
+*.log
+*.bak
