@@ -1,0 +1,129 @@
+name: Publish to npm
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Build, test and pack without publishing
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-npm
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+
+      - name: Validate release metadata
+        run: node scripts/release.mjs metadata
+
+      - name: Install npm with OIDC support
+        run: npm install --global npm@11.16.0 --ignore-scripts --registry=https://registry.npmjs.org
+
+      # Pin the development API while NTQQ is under npm review. The published
+      # Milky manifest keeps its registry peer range, without local paths.
+      - name: Checkout NTQQ public API source
+        uses: actions/checkout@v7
+        with:
+          repository: LuckyLilliaDev/lucky-lillia-plugin-ntqq-protocol
+          ref: cea358c3db1f7c639ba30450939212d338e4576e
+          path: _integration/ntqq
+          persist-credentials: false
+
+      - name: Build NTQQ public API
+        working-directory: _integration/ntqq
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund --registry=https://registry.npmjs.org
+          npm run build
+
+      - name: Install dependencies
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund --registry=https://registry.npmjs.org
+          node scripts/use-ntqq.mjs _integration/ntqq
+
+      - name: Check, test and build
+        run: |
+          npm run check
+          npm test
+          npm run build
+
+      - name: Pack the tested build
+        run: |
+          mkdir -p output/release
+          npm pack --ignore-scripts --json --pack-destination output/release > output/release/pack.json
+          node scripts/release.mjs pack
+
+      - name: Upload verified package
+        uses: actions/upload-artifact@v7
+        with:
+          name: npm-package
+          path: |
+            output/release/*.tgz
+            output/release/release.json
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    if: github.event_name != 'workflow_dispatch' || !inputs.dry_run
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout release verification scripts
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install npm with OIDC support
+        run: npm install --global npm@11.16.0 --ignore-scripts --registry=https://registry.npmjs.org
+
+      - name: Download tested package
+        uses: actions/download-artifact@v8
+        with:
+          name: npm-package
+          path: output/release
+
+      - name: Verify package integrity
+        id: package
+        run: node scripts/release.mjs artifact
+
+      - name: Reject an already published version
+        run: node scripts/release.mjs unpublished
+
+      - name: Publish with npm trusted publishing
+        env:
+          PACKAGE_TARBALL: ${{ steps.package.outputs.tarball }}
+          NPM_DIST_TAG: ${{ steps.package.outputs.tag }}
+        run: npm publish "$PACKAGE_TARBALL" --ignore-scripts --provenance --access public --registry=https://registry.npmjs.org --tag "$NPM_DIST_TAG"
+
+      - name: Confirm public version and integrity
+        run: node scripts/release.mjs published

@@ -56,7 +56,6 @@
     }
   },
   "devDependencies": {
-    "@luckylillia/plugin-nt-protocol": "^1.0.0",
     "@luckylillia/plugin-sdk": "^1.0.1",
     "@types/node": "^24.12.4",
     "@types/react": "^19.0.0",
