@@ -1,5 +1,5 @@
 {
-  "name": "@luckylillia/plugin-milky",
+  "name": "@luckylillia-dev/plugin-milky",
   "version": "1.0.0",
   "type": "module",
   "description": "Milky protocol adapter for LuckyLillia NTQQ",
@@ -40,15 +40,15 @@
     "zod": "^4.5.4"
   },
   "peerDependencies": {
-    "@luckylillia/plugin-nt-protocol": "^1.0.0",
-    "@luckylillia/plugin-sdk": "^1.0.1",
+    "@luckylillia-dev/plugin-nt-protocol": "^1.0.0",
+    "@luckylillia-dev/plugin-sdk": "^1.0.1",
     "cordis": "4.0.0-rc.11",
     "cosmokit": "^1.8.1",
     "react": "^19.0.0",
     "schemastery": "^3.18.0"
   },
   "peerDependenciesMeta": {
-    "@luckylillia/plugin-nt-protocol": {
+    "@luckylillia-dev/plugin-nt-protocol": {
       "optional": true
     },
     "react": {
@@ -56,7 +56,7 @@
     }
   },
   "devDependencies": {
-    "@luckylillia/plugin-sdk": "^1.0.1",
+    "@luckylillia-dev/plugin-sdk": "npm:@luckylillia/plugin-sdk@^1.0.1",
     "@types/node": "^24.12.4",
     "@types/react": "^19.0.0",
     "@types/ws": "^8.18.1",
@@ -78,7 +78,7 @@
     "icon": "milk",
     "description": "通过 NTQQ 提供 Milky HTTP API、WebSocket、SSE 和 Webhook。需要安装并启用 NTQQ 协议插件。",
     "dependencies": {
-      "@luckylillia/plugin-nt-protocol": "^1.0.0"
+      "@luckylillia-dev/plugin-nt-protocol": "^1.0.0"
     },
     "service": {
       "implements": [

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 import type { Context } from 'cordis'
-import { AtType, ChatType, ElementType, type RawMessage } from '@luckylillia/plugin-nt-protocol/api'
+import { AtType, ChatType, ElementType, type RawMessage } from '@luckylillia-dev/plugin-nt-protocol/api'
 import { transformIncomingSegments } from '../src/transform/message/incoming.js'
 
 const message = (elements: unknown[]) => ({ chatType: ChatType.Group, peerUid: '12345', elements }) as RawMessage

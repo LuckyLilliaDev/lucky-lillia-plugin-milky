@@ -19,8 +19,8 @@ import {
   GetForwardedMessagesOutput,
 } from '../generated/schema.js'
 import z from 'zod'
-import { ChatType, GroupMemberRole, IMAGE_HTTP_HOST_NT, RawMessage, User } from '@luckylillia/plugin-nt-protocol/api'
-import { Media } from '@luckylillia/plugin-nt-protocol/api'
+import { ChatType, GroupMemberRole, IMAGE_HTTP_HOST_NT, RawMessage, User } from '@luckylillia-dev/plugin-nt-protocol/api'
+import { Media } from '@luckylillia-dev/plugin-nt-protocol/api'
 
 const SendPrivateMessage = defineApi(
   'send_private_message',

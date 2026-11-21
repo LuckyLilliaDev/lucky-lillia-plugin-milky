@@ -31,7 +31,7 @@ import { TEMP_DIR } from '../support/temp.js'
 import { unlink, writeFile } from 'node:fs/promises'
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
-import { ChatType, GroupNotificationType, RequestState } from '@luckylillia/plugin-nt-protocol/api'
+import { ChatType, GroupNotificationType, RequestState } from '@luckylillia-dev/plugin-nt-protocol/api'
 import { transformIncomingSegments } from '../transform/message/index.js'
 import { noop } from 'cosmokit'
 

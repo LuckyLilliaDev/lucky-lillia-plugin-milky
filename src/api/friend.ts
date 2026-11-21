@@ -9,7 +9,7 @@ import {
   DeleteFriendInput,
 } from '../generated/schema.js'
 import z from 'zod'
-import { FriendReqType } from '@luckylillia/plugin-nt-protocol/api'
+import { FriendReqType } from '@luckylillia-dev/plugin-nt-protocol/api'
 
 const SendFriendNudge = defineApi(
   'send_friend_nudge',

@@ -29,7 +29,7 @@ import { unlink, writeFile } from 'node:fs/promises'
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { noop } from 'cosmokit'
-import { ChatType } from '@luckylillia/plugin-nt-protocol/api'
+import { ChatType } from '@luckylillia-dev/plugin-nt-protocol/api'
 
 const UploadPrivateFile = defineApi(
   'upload_private_file',

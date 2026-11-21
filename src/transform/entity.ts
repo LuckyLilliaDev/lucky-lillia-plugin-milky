@@ -1,8 +1,8 @@
 import { FriendEntity, GroupEntity, GroupFileEntity, GroupFolderEntity, GroupMemberEntity } from '../generated/schema.js'
-import { Friend, Group, GroupMemberRole, Sex } from '@luckylillia/plugin-nt-protocol/api'
-import { GroupMember } from '@luckylillia/plugin-nt-protocol/api'
+import { Friend, Group, GroupMemberRole, Sex } from '@luckylillia-dev/plugin-nt-protocol/api'
+import { GroupMember } from '@luckylillia-dev/plugin-nt-protocol/api'
 import { InferProtoModel } from '@saltify/typeproto'
-import { Oidb } from '@luckylillia/plugin-nt-protocol/api'
+import { Oidb } from '@luckylillia-dev/plugin-nt-protocol/api'
 
 export function transformGender(gender: Sex): 'male' | 'female' | 'unknown' {
   if (gender === Sex.Male) return 'male'

@@ -1,7 +1,7 @@
 import { IncomingMessage, IncomingSegment, IncomingForwardedMessage } from '../../generated/schema.js'
 import { transformFriend, transformGroup, transformGroupMember } from '../entity.js'
-import { RawMessage, ElementType, AtType, ChatType, Group } from '@luckylillia/plugin-nt-protocol/api'
-import { Friend, GroupMember } from '@luckylillia/plugin-nt-protocol/api'
+import { RawMessage, ElementType, AtType, ChatType, Group } from '@luckylillia-dev/plugin-nt-protocol/api'
+import { Friend, GroupMember } from '@luckylillia-dev/plugin-nt-protocol/api'
 import { Context } from 'cordis'
 import { XMLParser } from 'fast-xml-parser'
 

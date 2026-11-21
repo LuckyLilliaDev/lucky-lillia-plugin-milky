@@ -8,7 +8,7 @@ const registry = 'https://registry.npmjs.org'
 const repository = 'LuckyLilliaDev/lucky-lillia-plugin-milky'
 const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'))
 const semver = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*)(?:\.(?:0|[1-9]\d*|\d*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/
-assert.equal(pkg.name, '@luckylillia/plugin-milky')
+assert.equal(pkg.name, '@luckylillia-dev/plugin-milky')
 assert.match(pkg.version, semver, 'Expected a full SemVer version')
 assert.equal(pkg.repository?.type, 'git')
 assert.equal(pkg.repository?.url, 'git+https://github.com/' + repository + '.git')
@@ -21,7 +21,7 @@ for (const field of ['dependencies', 'devDependencies', 'peerDependencies', 'opt
 }
 const version = pkg.version
 const tag = version.split('+')[0].includes('-') ? 'next' : 'latest'
-const filename = 'luckylillia-plugin-milky-' + version + '.tgz'
+const filename = 'luckylillia-dev-plugin-milky-' + version + '.tgz'
 const artifact = path.resolve(process.argv[3] ?? path.join(root, 'output/release'))
 const tarball = path.join(artifact, filename)
 const command = process.argv[2]

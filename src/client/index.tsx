@@ -1,7 +1,7 @@
 import React from 'react'
-import { SchemaSettings, type WebUIPlugin } from '@luckylillia/plugin-sdk/webui'
+import { SchemaSettings, type WebUIPlugin } from '@luckylillia-dev/plugin-sdk/webui'
 
-export const name = '@luckylillia/plugin-milky'
+export const name = '@luckylillia-dev/plugin-milky'
 
 const MilkySettings = () => (
   <SchemaSettings links={[{ label: '文档', href: 'https://www.luckylillia.com/guide/develop#milky-%E5%8D%8F%E8%AE%AE' }]} />

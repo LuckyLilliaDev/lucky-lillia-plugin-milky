@@ -36,7 +36,7 @@ import {
   transformBotOfflineEvent,
   transformGroupDisbandEvent,
 } from './transform/event.js'
-import { ChatType } from '@luckylillia/plugin-nt-protocol/api'
+import { ChatType } from '@luckylillia-dev/plugin-nt-protocol/api'
 
 declare module 'cordis' {
   interface Context {
